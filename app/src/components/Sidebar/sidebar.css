@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.sidebar {
+  width: 100%;
+  height: 100%;
+  background-color: #FFF;
+}
+
+.linhaCard {
+  width: 300px;
+  height: 50px;
+  background-color: rgba(99, 0, 238, 0.08);
+  border-radius: 4px;
+}
+
+.linhaCard .nomeLinha {
+  color: rga(0, 0, 0, 87%);
+  font-weight: bold;
+  font-family: 'Roboto';
+  font-size: 16px;
+  padding: 0;
+  margin-bottom: 3px;
+  margin-left: 5px;
+}
+
+.paradaCard {
+  width: 300px;
+  height: 50px;
+  background-color: rgba(99, 0, 238, 0.08);
+  border-radius: 4px;
+}
+
+.paradaCard .nomeParada {
+  color: rga(0, 0, 0, 87%);
+  font-weight: bold;
+  font-family: 'Roboto';
+  font-size: 16px;
+  padding: 0;
+  margin-bottom: 3px;
+  margin-left: 5px;
+}
+
+.paradaCard .enderecoParada {
+  color: rga(0, 0, 0, 87%);
+  font-weight: normal;
+  font-family: 'Roboto';
+  font-size: 10px;
+  padding: 0;
+  margin-top: 0px;
+  margin-left: 5px;
+}
+/*# sourceMappingURL=sidebar.css.map */
