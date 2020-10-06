@@ -2,3 +2,4 @@ app/node_modules
 server
 server/node_modules
 app/.env
+app/src/.env
