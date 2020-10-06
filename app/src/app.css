@@ -1,13 +1,25 @@
+
 .container {
-    display: grid;
-    grid-template-columns: 2fr 6fr;
+	height: 100vh;
+	width: 100vw;
+}
+.containerMain {
+	display: flex;
+}
+
+.sidebar {
+	font-size: 1px;
+	width: 500px;
+	height: 100vh;
+}
+
+.gmap {
+	height: 100vh;
+	width: 100vw;
 }
 
 html, body {
     margin: 0;
     padding: 0;
-
-
-    height: 100%;
-    width: 100%;
+	box-sizing: border-box;
 }

@@ -1,3 +1,6 @@
+
+import { TextField, IconButton, Toolbar, Divider, List, ListItem, ListItemIcon, ListItemText, Icon, Button } from '@material-ui/core';
+import { Search } from '@material-ui/icons';
 import React, { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { searchInput } from '../../store/modules/search/actions';
@@ -26,10 +29,13 @@ const Sidebar: React.FC = () => {
 
     return(
 
-        <div className="sidebar">
-
-            <input onChange={handleSearchInputValue} type="text" placeholder="Digite uma Linha"/>
-            <button onClick={() => handleSearchInput(searchInputValue)}type="button"> buscar </button>
+		<div>
+            <div className='searchContainer'> 
+                <TextField onChange={handleSearchInputValue} id="outlined-basic" size='small' variant="outlined" label="Buscar Linha" />
+                <IconButton onClick={() => handleSearchInput(searchInputValue)} aria-label="delete" color="primary"><Search /></IconButton>
+            </div>
+			
+            {/* <button type="button"> buscar </button> */}
 
             {/* <div className="paradaCard">
                 <h3 className="nomeParada">BRASIL B/C</h3>
@@ -40,7 +46,8 @@ const Sidebar: React.FC = () => {
                 <h3 className="nomeLinha">BRASIL B/C</h3>
             </div>
 
-        </div>
+
+			</div>
     );
 }
 

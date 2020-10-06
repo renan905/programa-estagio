@@ -1,9 +1,13 @@
 import { applyMiddleware, createStore, Middleware, Reducer } from "redux";
+import { MapConfigState } from "./modules/mapconfig/types";
+import { MapDataState } from "./modules/mapdata/types";
 import { SearchAction, SearchState } from "./modules/search/types";
 
 
 export interface StoreState {
-    search: SearchState;
+	search: SearchState;
+	mapconfig: MapConfigState;
+	mapdata: MapDataState;
 }
 
 // StoreAction contem todos os tipos da store, 
