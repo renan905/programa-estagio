@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Grid } from '@material-ui/core';
+
 
 import Sidebar from './components/Sidebar';
 import GMap from './components/GMap'
@@ -12,21 +14,23 @@ function App() {
 
 	return (
 		<>
-		<div className='container'>
-				<TopBar/>
-			
-
-			<section className='containerMain' >
-
-				<div className="sidebar">
+		<Grid container>
+			<Grid item xs={12}>
+				<div className='a'>
+					<TopBar/>
+				</div>
+			</Grid>
+			<Grid item spacing={0} xs={3}>
+				<div className='b'> 
 					<Sidebar />
 				</div>
-
-				<div className="gmap">
-					<GMap />
+			</Grid>
+			<Grid item xs={9}>
+				<div className='c'> 
+					<GMap/>
 				</div>
-			</section>
-		</div>
+			</Grid>
+		</Grid>
 
 		</>
 	);

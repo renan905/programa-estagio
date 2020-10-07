@@ -10,4 +10,6 @@ export interface MapDataState {
 export interface MetaInfo {
 	readonly totalCars: number,
 	readonly updateTime: string,
+	readonly totalParadas: number,
 }
+

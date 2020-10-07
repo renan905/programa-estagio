@@ -4,9 +4,9 @@ import { MapDataAction, MapDataState } from "./types";
 const initialState: MapDataState = {
 	metaInfo: {
 		totalCars: 0,
+		totalParadas: 0,
 		updateTime: ""
 	}
-	
 }
 
 export default function mapdata( state = initialState, action: MapDataAction): MapDataState {
@@ -16,7 +16,8 @@ export default function mapdata( state = initialState, action: MapDataAction): M
                 ...state,
 				metaInfo: {
 					totalCars: action.payload.metaInfo.totalCars,
-					updateTime: action.payload.metaInfo.updateTime
+					updateTime: action.payload.metaInfo.updateTime,
+					totalParadas: action.payload.metaInfo.totalParadas
 				}
             }
         default:

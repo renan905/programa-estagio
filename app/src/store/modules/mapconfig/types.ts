@@ -6,7 +6,7 @@ export type MapConfigAction = ActionType<typeof actions>;
 export interface MapConfigState {
 	readonly center: GeoInfo,
 	readonly zoom: number,
-	readonly mapStyle: {
+	readonly mapStyle?: {
 		readonly width: string,
 		readonly height: string,
 	}

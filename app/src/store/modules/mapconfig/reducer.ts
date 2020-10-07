@@ -21,7 +21,14 @@ export default function mapconfig( state = initialState, action: MapConfigAction
                 ...state,
 				zoom: action.payload.zoom,
 				center: action.payload.center,
-            }
+			}
+		case '@mapconfig/MAP_CENTER_ZOOM':
+			return {
+                ...state,
+				zoom: action.payload.zoom,
+				center: action.payload.center,
+			}
+
         default:
             return state;
     }

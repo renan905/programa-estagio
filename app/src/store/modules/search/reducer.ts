@@ -2,7 +2,8 @@ import { SearchAction, SearchState } from "./types";
 
 
 const initialState: SearchState = {
-    searchValue: '',
+	searchValue: '',
+	searchType: '',
 }
 
 export default function search( state = initialState, action: SearchAction): SearchState {
@@ -10,7 +11,8 @@ export default function search( state = initialState, action: SearchAction): Sea
         case '@search/SEARCH_INPUT':
             return {
                 ...state,
-                searchValue: action.payload.searchValue
+				searchValue: action.payload.searchValue,
+				searchType: action.payload.searchType
             }
         
         default:

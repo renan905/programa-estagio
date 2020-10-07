@@ -9,3 +9,11 @@ export function mapSettings( { zoom, center, mapStyle } : MapConfigState ) {
 		mapStyle
     })
 }
+
+export function mapCenterZoom( { zoom, center } : MapConfigState ) {
+	// RETURN = 'ACTION', PAYLOAD{}
+	return action('@mapconfig/MAP_CENTER_ZOOM', {
+		zoom,
+		center
+    })
+}
