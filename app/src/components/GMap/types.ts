@@ -8,7 +8,8 @@ export interface BusGeo {
     "a": boolean,
     "ta": string,
     "py": number,
-    "px": number,
+	"px": number,
+	"t"?: string
 }
 
 export interface BusLinhas {
