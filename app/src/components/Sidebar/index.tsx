@@ -13,12 +13,14 @@ import api from '../../services/api';
 import "./style/sidebar.css";
 import { mapCenterZoom } from '../../store/modules/mapconfig/actions';
 import { BusGeo, BusLinhas } from '../GMap/types';
+import { mapData } from '../../store/modules/mapdata/actions';
 
 const Sidebar: React.FC = () => {
 
-	const [paradasDetalhes, setParadasDetalhes] = React.useState(false);
 
-	const [value, setValue] = React.useState(0);
+	const [paradasDetalhes, setParadasDetalhes] = useState(false);
+
+	const [value, setValue] = useState(0);
 	const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
 		setValue(newValue);
 
@@ -84,12 +86,12 @@ const Sidebar: React.FC = () => {
 	}, [searchValue, searchType]);
 
 	const handleLoadCarByLinhas = (_e: React.MouseEvent<HTMLDivElement, MouseEvent>, data: LinhasTypes) => {
-		handleSearchInput(data.cl.toString(), 'QUERY_POSICAO_POR_LINHA')
+		handleSearchInput(data.cl.toString(), 'QUERY_POSICAO_POR_LINHA');
 	}
 
 	const handleLoadParadas = (data: ParadasTypes) => {
 		if (value === 0) {
-			handleSearchInput(data.cp.toString(), 'QUERY_PARADAS_CODIGO')
+			handleSearchInput(data.cp.toString(), 'QUERY_PARADAS_CODIGO');
 		} else {
 			dispatch(mapCenterZoom({
 				center: {
@@ -97,13 +99,15 @@ const Sidebar: React.FC = () => {
 					lng: data.px
 				},
 				zoom: 15
-			}))
-			console.log(data.cp.toString())
+			}));
+			console.log(data.cp.toString());
 			
-			handleSearchInput(data.cp.toString(), 'QUERY_PREVISAO_POR_PARADA')
-			setParadasDetalhes(true)
+			handleSearchInput(data.cp.toString(), 'QUERY_PREVISAO_POR_PARADA');
+			setParadasDetalhes(true);
+
 		}
 	}
+
 	
     return (
 		<>
@@ -171,7 +175,6 @@ const Sidebar: React.FC = () => {
 			{(paradasDetalhes) &&
 			<div className='flip-horizontal-bottom previsõesParada'> 
 				<IconButton className='closePrevisoes'  onClick={() =>  setParadasDetalhes(false)}><Cancel/></IconButton>
-				{/* <button onClick={() =>  setParadasDetalhes(false)}>fechar</button> */}
 				{(posicoes.length > 0) &&
 					posicoes.map( ( dataLinhas : BusLinhas ) => (
 
@@ -189,9 +192,6 @@ const Sidebar: React.FC = () => {
 								<p className='enderecoPrevisao'>destino: <strong className='local'>{(dataLinhas.sl) ? dataLinhas.lt0 : dataLinhas.lt1}</strong></p>
 							</div>
 								
-								
-							
-
 							<div className='preivsaoLinha'>
 								{dataLinhas.vs.map( ( bus: BusGeo) => (
 									<div key={bus.p} className='previsoes'>

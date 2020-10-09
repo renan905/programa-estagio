@@ -92,6 +92,8 @@ const GMap: React.FC = () => {
 		});
 	}
 
+
+
 	const { searchValue, searchType } = useSelector((state: StoreState) => state.search)
     const [ posicoes, setPosicoes] = useState([]);
 	useEffect(() => {
@@ -271,8 +273,9 @@ const GMap: React.FC = () => {
 				};
 
 				{((searchType === 'QUERY_BUSCAR_PARADA') || (searchType === 'QUERY_PREVISAO_POR_PARADA')) &&
-					paradas.map( ( parada : ParadasTypes ) => (
+					paradas.map( ( parada : ParadasTypes ) => (	
 						<Marker
+							visible={(searchType === 'QUERY_BUSCAR_PARADA') ? true : ((parada.cp.toString() === searchValue) ? true : false)}
 							onLoad={() => handleMetaData(false, '', false, true)}
 							key={parada.cp} 
 							position={ { lat: parada.py, lng: parada.px } }

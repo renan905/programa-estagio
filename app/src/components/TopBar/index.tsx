@@ -12,6 +12,8 @@ const TopBar: React.FC = () => {
 
 	// MAP CONFIG
 	const { totalCars, updateTime, totalParadas, agoraNoMapa } = useSelector((state: StoreState) => state.mapdata.metaInfo)
+	const { searchType } = useSelector((state: StoreState) => state.search)
+
 	
     return(
 		<>
@@ -20,7 +22,7 @@ const TopBar: React.FC = () => {
 				<div>
 					<h3>Agora no mapa: {(agoraNoMapa === '') ? 'São Paulo' : agoraNoMapa}</h3>
 				</div>
-				<Badge className='iconStyle' color="secondary" max={100000} aria-label="Número de Paradas no Mapa"  badgeContent={totalParadas}>
+				<Badge className='iconStyle' color="secondary" max={100000} aria-label="Número de Paradas no Mapa"  badgeContent={ (searchType === 'QUERY_PREVISAO_POR_PARADA') ? 1 : totalParadas}>
 					<GolfCourse color='secondary'/>
 				</Badge>
 				<Badge className='iconStyle' color="secondary"  max={100000} badgeContent={totalCars}>
