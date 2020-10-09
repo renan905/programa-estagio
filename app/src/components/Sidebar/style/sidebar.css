@@ -1,0 +1,492 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.tabsBar .MuiTab-root {
+  min-width: 100px;
+}
+
+.tabsBar .MuiTab-root .MuiTab-wrapper {
+  font-size: 12px;
+}
+
+.sidebar {
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  overflow: auto;
+}
+
+.searchContainer {
+  padding-top: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.searchContainer .paper {
+  padding-left: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 300px;
+}
+
+.linhaContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 5px;
+}
+
+.linhaContainer .viewLinhas {
+  right: 3px;
+  left: 2px;
+}
+
+.linhaContainer .linhaCard {
+  width: 300px;
+  height: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.linhaContainer .linhaCard .codigoLinha {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 6px;
+  margin-right: 10px;
+  padding: 0;
+}
+
+.linhaContainer .linhaCard .codigoLinha .codLinha {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 10px;
+  margin: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.linhaContainer .linhaCard .codigoLinha .nomeLinha {
+  color: #0F44FA;
+  font-weight: bold;
+  font-family: 'Roboto';
+  font-size: 16px;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 3px;
+  margin-left: 5px;
+}
+
+.linhaContainer .linhaCard .infoParadas {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.linhaContainer .linhaCard .infoParadas .divider {
+  margin-right: 6px;
+  margin-left: 6px;
+  height: 40px;
+}
+
+.linhaContainer .linhaCard .infoParadas .detalhesParada {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.linhaContainer .linhaCard .infoParadas .detalhesParada .direcaoParada {
+  margin-right: 3px;
+  margin-left: 3px;
+  font-size: 10px;
+  font-family: 'Roboto';
+  font-weight: bolder;
+}
+
+.linhaContainer .linhaCard .infoParadas .detalhesParada .enderecoParada {
+  color: rga(0, 0, 0, 87%);
+  font-weight: normal;
+  font-family: 'Roboto';
+  font-size: 10px;
+  padding: 0;
+  margin-top: 0px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.linhaContainer .linhaCard:hover {
+  -webkit-transform: scale(1.11);
+          transform: scale(1.11);
+  position: relative;
+  z-index: 1;
+}
+
+.paradaContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 5px;
+}
+
+.paradaContainer .viewLinhas {
+  right: 3px;
+  left: 2px;
+}
+
+.paradaContainer .paradaCard {
+  width: 300px;
+  height: auto;
+  min-height: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.paradaContainer .paradaCard .divider {
+  margin-right: 6px;
+  margin-left: 6px;
+  height: 40px;
+}
+
+.paradaContainer .paradaCard .nomeParada {
+  color: #0F44FA;
+  font-weight: bold;
+  font-family: 'Roboto';
+  font-size: 16px;
+  padding: 0;
+  margin-left: 6px;
+}
+
+.paradaContainer .paradaCard .enderecoParada {
+  color: rga(0, 0, 0, 87%);
+  font-weight: normal;
+  font-family: 'Roboto';
+  font-size: 10px;
+  padding: 0;
+  margin-top: 0px;
+  margin-left: 5px;
+}
+
+.paradaContainer .paradaCard:hover {
+  -webkit-transform: scale(1.09);
+          transform: scale(1.09);
+  position: relative;
+  z-index: 1;
+}
+
+.previsõesParada {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 5px;
+}
+
+.previsõesParada .previsaoCard {
+  width: 300px;
+  height: auto;
+  min-height: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.previsõesParada .previsaoCard .infoLinha {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+}
+
+.previsõesParada .previsaoCard .infoLinha .divider {
+  margin-right: 10px;
+  margin-left: 10px;
+  height: 40px;
+}
+
+.previsõesParada .previsaoCard .infoLinha .label {
+  font-size: 14px;
+  font-weight: bolder;
+  font-family: 'Roboto';
+  text-align: center;
+}
+
+.previsõesParada .previsaoCard .infoLinha .label .infoStrong {
+  font-size: 18px;
+  font-weight: bolder;
+  color: #19E3D2;
+}
+
+.previsõesParada .previsaoCard .infoLinha .label .infoVeiculos {
+  font-size: 18px;
+  font-weight: bolder;
+  color: #19E3D2;
+}
+
+.previsõesParada .previsaoCard .direcaoPrevisao {
+  margin-right: 3px;
+  margin-left: 3px;
+  font-size: 10px;
+  font-family: 'Roboto';
+  font-weight: bolder;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
+}
+
+.previsõesParada .previsaoCard .direcaoPrevisao .enderecoPrevisao {
+  color: rga(0, 0, 0, 87%);
+  font-weight: normal;
+  font-family: 'Roboto';
+  font-size: 12px;
+  padding: 0;
+  margin-top: 0px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.previsõesParada .previsaoCard .direcaoPrevisao .enderecoPrevisao .local {
+  font-weight: bold;
+}
+
+.previsõesParada .previsaoCard .previsoes {
+  font-size: 12px;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.previsõesParada .previsaoCard .previsoes .divider {
+  margin-right: 6px;
+  margin-left: 6px;
+  height: 40px;
+}
+
+.previsõesParada .previsaoCard .previsoes .onibus {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.previsõesParada .previsaoCard .previsoes .onibus .onibusNome {
+  font-family: 'Roboto';
+  text-align: center;
+  font-weight: 500;
+  font-size: 10px;
+  margin: 0;
+}
+
+.previsõesParada .previsaoCard .previsoes .onibus .codOnibus {
+  color: #0F44FA;
+  font-weight: bold;
+  font-family: 'Roboto';
+  font-size: 16px;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 3px;
+  margin-left: 5px;
+}
+
+.previsõesParada .previsaoCard .previsoes .chegada {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.previsõesParada .previsaoCard .previsoes .chegada .labelPrevisao {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 10px;
+  margin: 0;
+}
+
+.previsõesParada .previsaoCard .previsoes .chegada .horaPrevisao {
+  color: #0F44FA;
+  font-weight: bold;
+  font-family: 'Roboto';
+  font-size: 16px;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 3px;
+  margin-left: 5px;
+}
+
+slide-top {
+  -webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+  }
+}
+
+@keyframes slide-top {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(-100px);
+    transform: translateY(-100px);
+  }
+}
+/*# sourceMappingURL=sidebar.css.map */
