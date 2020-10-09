@@ -1,13 +1,24 @@
 
 
 .appBarConfig {
-
 	.spacer {
 		flex-grow: 1;
 	}
 }
 
-.iconStyle {
-	margin-left: 15px;
-	margin-right: 15px;
+
+
+.infoAreas {
+	height: 50px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	justify-items: center;
+
+	.iconStyle {
+		margin-left: 20px;
+		margin-right: 20px;
+	}
 }
+
