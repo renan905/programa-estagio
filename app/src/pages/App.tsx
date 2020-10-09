@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useState, useEffect }  from 'react';
 
 import { Grid, CircularProgress } from '@material-ui/core';
 
@@ -9,18 +9,21 @@ import TopBar from '../components/TopBar'
 import "./app.css";
 
 function App() {
+
+	
+
+
+
 	return (
 		<>
-		<div className='load'>
-			<CircularProgress color='secondary' />
-		</div>
+
 		<Grid container>
 			<Grid item xs={12}>
 				<div className='topbar'>
 					<TopBar/>
 				</div>
 			</Grid>
-			<Grid item xs={3}>
+			<Grid item xs={3} >
 				<div className='sidebar'> 
 					<Sidebar />
 				</div>

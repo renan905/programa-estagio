@@ -489,4 +489,37 @@ slide-top {
     transform: translateY(-100px);
   }
 }
+
+.overview {
+  margin-top: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+}
+
+.overview .infoOverview {
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.overview .infoAviso {
+  padding: 10px;
+  text-align: center;
+  color: dimgray;
+}
 /*# sourceMappingURL=sidebar.css.map */

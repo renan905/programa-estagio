@@ -4,6 +4,15 @@
           flex-grow: 1;
 }
 
+.agoraNoMapa .label {
+  font-size: 16px;
+}
+
+.agoraNoMapa .local {
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .infoAreas {
   height: 50px;
   display: -webkit-box;

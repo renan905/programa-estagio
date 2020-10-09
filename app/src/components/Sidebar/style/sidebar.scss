@@ -417,3 +417,31 @@ slide-top {
 			  transform: translateY(-100px);
 	}
   }
+
+
+  
+.overview {
+	margin-top: 30px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 15px;
+	
+	.infoOverview {
+		padding: 10px;
+		font-size: 18px;
+		font-weight: bolder;
+		text-align: center;
+		
+	}
+	.infoAviso {
+		padding: 10px;
+		text-align: center;
+		color: dimgray;
+	}
+}

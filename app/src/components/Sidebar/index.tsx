@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { TextField, IconButton, Tabs, Tab, AppBar, Paper, InputBase, Divider } from '@material-ui/core';
+import { TextField, IconButton, Tabs, Tab, AppBar, Paper, InputBase, Divider, Switch, FormControlLabel } from '@material-ui/core';
 import { Info, Search, ArrowRight, Cancel, ArrowRightAlt } from '@material-ui/icons';
 
 import { searchInput } from '../../store/modules/search/actions';
@@ -14,6 +14,9 @@ import "./style/sidebar.css";
 import { mapCenterZoom } from '../../store/modules/mapconfig/actions';
 import { BusGeo, BusLinhas } from '../GMap/types';
 import { mapData } from '../../store/modules/mapdata/actions';
+
+
+
 
 const Sidebar: React.FC = () => {
 
@@ -37,8 +40,11 @@ const Sidebar: React.FC = () => {
 					type = 'QUERY_BUSCAR_LINHA'
 				} else if (value === 1) {
 					type = 'QUERY_BUSCAR_PARADA'
+				} else if (value === 2) {
+					type = 'QUERY_DISPLAY_ALL'
 				}
 			}
+
             dispatch(searchInput({
 				searchValue: searchString,
 				searchType: type
@@ -107,21 +113,33 @@ const Sidebar: React.FC = () => {
 
 		}
 	}
+	const [ overview, setOverview] = useState(false);
+	const handleOverView = () => {
+		
+		if (overview){
+			setOverview(false);
+			handleSearchInput('Clean', 'CLEAN');
+		} else {
+			setOverview(true);
+			handleSearchInput('Overview', 'QUERY_DISPLAY_ALL');
+		}
+	}
 
 	
     return (
 		<>
+		
 			{/* TABS */}
 			<AppBar position="static" className='tabsBar'>
 				<Tabs value={value} onChange={handleChange} variant="scrollable" aria-label="simple tabs example">
 					<Tab label="Linhas" />
 					<Tab label="Paradas" />
-					<Tab label="Configurações" />
+					<Tab label="Overview" />
 				</Tabs>
 			</AppBar>
 
 			{/* SEARCH CONTAINER */}
-            <div className='searchContainer' id='searchBox'>
+            <div className='searchContainer' id='searchBox'  style={{display: (value === 2) ? 'none' : 'flex'}}>
 				<Paper className='paper' component="form">
 					<IconButton><Info/></IconButton>
 					<InputBase onChange={handleSearchInputValue} id="outlined-basic" placeholder={(value === 0) ? 'Buscar Linha': 'Buscar Parada'}/>
@@ -216,7 +234,16 @@ const Sidebar: React.FC = () => {
 			</div>
 			}
 
-			<div role="tabpanel" hidden={value !== 2} id={`${value}`}>0909</div>
+			<div role="tabpanel" hidden={value !== 2} id={`${value}`}>
+				<div>
+					<Paper className='overview'>
+						<p className='infoOverview'>O modo Overview permite visualizar todos os ônibus de São Paulo</p>
+						<small className='infoAviso'>Devido ao grande numero de veiculos, o modo Overview pode causar travamentos e redução de desenpenho</small>
+						<FormControlLabel onChange={handleOverView} control={<Switch/>} label={(overview) ? 'Desativar Overview' : 'Ativar Overview'} />
+					</Paper>
+				</div>
+				
+			</div>
 		</>
     );
 }

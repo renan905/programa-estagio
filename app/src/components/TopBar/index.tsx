@@ -19,8 +19,8 @@ const TopBar: React.FC = () => {
 		<>
 
 			<div className='infoAreas'>
-				<div>
-					<h3>Agora no mapa: {(agoraNoMapa === '') ? 'São Paulo' : agoraNoMapa}</h3>
+				<div className='agoraNoMapa'>
+					<h3 className='label'>Agora no mapa: <strong className='local'>{(agoraNoMapa === '') ? 'São Paulo' : agoraNoMapa}</strong></h3>
 				</div>
 				<Badge className='iconStyle' color="secondary" max={100000} aria-label="Número de Paradas no Mapa"  badgeContent={ (searchType === 'QUERY_PREVISAO_POR_PARADA') ? 1 : totalParadas}>
 					<GolfCourse color='secondary'/>

@@ -12,12 +12,13 @@ import { BusLinhas, BusGeo, PathOptions, GMapData } from './types'
 import { ParadasTypes } from '../Sidebar/types';
 
 import "./map.css";
+import { CircularProgress } from '@material-ui/core';
 
 
 const GMap: React.FC = () => {
 	
 	const dispatch = useDispatch();
-
+	const [ loading, setLoading ] = useState(false);
 
 	// AUTO UPDATE
 	const [ update, setUpdate] = useState(() => { return false});
@@ -48,7 +49,6 @@ const GMap: React.FC = () => {
 		if (cars){
 			
 			setMetaData(prevTotal => {
-				console.log(prevTotal.totalCarsLoaded)
 				return {
 					...prevTotal,
 					totalCarsLoaded: prevTotal.totalCarsLoaded + 1
@@ -72,7 +72,6 @@ const GMap: React.FC = () => {
 			});
 		}
 		if (reset) {
-			console.log('RESET')
 			setMetaData(prevTotal => {
 				return {
 					...prevTotal,
@@ -102,10 +101,14 @@ const GMap: React.FC = () => {
 			
 			// SHOW ALL BUSES
 			case 'QUERY_DISPLAY_ALL':
+				setLoading(true)
 				api.get("/Posicao").then( res => {
 					handleMetaData(true, res.data.hr);
 					setPosicoes(res.data.l);
-					handleAgoraNoMapa("Todos os ônibus de São Paulo;")
+					handleAgoraNoMapa("OVERVIEW - Todos os ônibus de São Paulo")
+					
+				}).catch( err => {
+					console.log(err)
 				})
 				break
 
@@ -144,6 +147,12 @@ const GMap: React.FC = () => {
 					console.log(err)
 				})
 				break
+			
+			case 'CLEAN':
+				handleMetaData(true);
+				setPosicoes([]);
+				setParadas([]);
+				break
 
 			default:
 				break
@@ -181,6 +190,7 @@ const GMap: React.FC = () => {
 	
 
 	useEffect( () => {
+		setLoading(false)
 		dispatch(mapData({
 			metaInfo: {
 				totalCars: metaData.totalCarsLoaded,
@@ -213,6 +223,9 @@ const GMap: React.FC = () => {
 
     return (
         <div className='mapContainer'>
+					<div className='load' style={{display: (loading) ? 'flex' : 'none'}}>
+			<CircularProgress color='secondary' />
+		</div>
 			<LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API} >
 				
 				<GoogleMap mapContainerStyle={mapStyle} zoom={zoom} center={center}>
@@ -224,7 +237,6 @@ const GMap: React.FC = () => {
 								onLoad={() => handleMetaData(false, '', true , false)}
 								key={bus.p} 
 								position={ { lat: bus.py, lng: bus.px } }
-								
 							/>
 						))
 					))
@@ -238,7 +250,7 @@ const GMap: React.FC = () => {
 							position={ { lat: bus.py, lng: bus.px } }
 							onClick={() => handleSelectInfoWindowBus(bus, true) }
 							icon={{
-								url: '/bus-marker.svg',
+								url: '/bus1.svg',
 								scaledSize: {height:30, width:30},
 							}}
 						/>
@@ -252,6 +264,10 @@ const GMap: React.FC = () => {
 								onLoad={() => handleMetaData(false, '', true , false)}
 								key={bus.p} 
 								position={ { lat: bus.py, lng: bus.px } }
+								icon={{
+									url: '/bus1.svg',
+									scaledSize: {height:30, width:30},
+								}}
 							/>
 						))
 					))
@@ -265,8 +281,8 @@ const GMap: React.FC = () => {
 							position={ { lat: parada.py, lng: parada.px } }
 							onClick={() => handleSelectInfoWindowParada(parada, true) }
 							icon={{
-								url: '/bus-stop.svg',
-								scaledSize: {height:30, width:30},
+								url: '/bus-stop2.svg',
+								scaledSize: {height:40, width:40},
 							}}
 						/>		
 					))
@@ -281,8 +297,8 @@ const GMap: React.FC = () => {
 							position={ { lat: parada.py, lng: parada.px } }
 							onClick={() => handleSelectInfoWindowParada(parada, true) }
 							icon={{
-								url: '/bus-stop.svg',
-								scaledSize: {height:30, width:30},
+								url: '/bus-stop2.svg',
+								scaledSize: {height: 40, width: 40},
 							}}
 						/>
 					))
