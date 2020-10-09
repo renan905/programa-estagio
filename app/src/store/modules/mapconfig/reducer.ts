@@ -10,8 +10,7 @@ const initialState: MapConfigState = {
 	mapStyle: {
 		width: '100%',
 		height: '100%' 
-	}
-	
+	},
 }
 
 export default function mapconfig( state = initialState, action: MapConfigAction): MapConfigState {

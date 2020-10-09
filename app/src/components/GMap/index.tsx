@@ -15,25 +15,6 @@ import "./map.css";
 
 
 const GMap: React.FC = () => {
-
-    const path = [
-        { lat: -23.444654, lng: - 46.804041 },
-    ];
-    
-    const options = {
-        strokeColor: '#FF0000',
-        strokeOpacity: 0.5,
-        strokeWeight: 8,
-        fillColor: '#FF0000',
-        fillOpacity: 0.35,
-        clickable: false,
-        draggable: false,
-        editable: false,
-        visible: true,
-        radius: 10000,
-        paths: path,
-        zIndex: 1
-	};
 	
 	const dispatch = useDispatch();
 
@@ -57,21 +38,24 @@ const GMap: React.FC = () => {
 	const { center, mapStyle, zoom } = useSelector((state: StoreState) => state.mapconfig)
 
 
-	// * NUMBER OF CARS AND TIME HANDLER
+
+	// * NUMBER OF CARS, STOPS, LOCATION AND TIME HANDLER
 	const [ metaData, setMetaData ] = useState(() => {
-		return {totalCarsLoaded: 0, timeLoaded: '', totalParadas: 0}
+		return {totalCarsLoaded: 0, timeLoaded: '', totalParadas: 0, agoraNoMapa: ''}
 	});
-	function handleMetaData(reset: boolean, time: string = '', cars: boolean = false, paradas: boolean = false) {
-		// case true, set number of cats, else, set time
+	function handleMetaData(reset: boolean = false, time: string = '', cars: boolean = false, paradas: boolean = false) {
+		
 		if (cars){
+			
 			setMetaData(prevTotal => {
+				console.log(prevTotal.totalCarsLoaded)
 				return {
 					...prevTotal,
 					totalCarsLoaded: prevTotal.totalCarsLoaded + 1
 				}
 			});
 		}
-		else if (time !== '') {
+		if (time !== '') {
 			setMetaData(prevTotal => {
 				return {
 					...prevTotal,
@@ -79,7 +63,7 @@ const GMap: React.FC = () => {
 				}
 			});
 		}
-		else if (paradas){
+		if (paradas){
 			setMetaData(prevTotal => {
 				return {
 					...prevTotal,
@@ -87,7 +71,8 @@ const GMap: React.FC = () => {
 				}
 			});
 		}
-		else if (reset) {
+		if (reset) {
+			console.log('RESET')
 			setMetaData(prevTotal => {
 				return {
 					...prevTotal,
@@ -96,9 +81,16 @@ const GMap: React.FC = () => {
 				}
 			});
 		}
-
 	}
-
+	// handleMetaData extension 
+	function handleAgoraNoMapa(local: string) {
+		setMetaData(prevTotal => {
+			return {
+				...prevTotal,
+				agoraNoMapa: local
+			}
+		});
+	}
 
 	const { searchValue, searchType } = useSelector((state: StoreState) => state.search)
     const [ posicoes, setPosicoes] = useState([]);
@@ -106,24 +98,27 @@ const GMap: React.FC = () => {
 		
 		switch (searchType){
 			
-			// SHOW ALL CARS
+			// SHOW ALL BUSES
 			case 'QUERY_DISPLAY_ALL':
 				api.get("/Posicao").then( res => {
-					setPosicoes(res.data.l);
 					handleMetaData(true, res.data.hr);
+					setPosicoes(res.data.l);
+					handleAgoraNoMapa("Todos os ônibus de São Paulo;")
 				})
 				break
-			// SHOW CARS BY LINE
+
+			// SHOW BUSES BY LINE
 			case 'QUERY_POSICAO_POR_LINHA':
 				api.get(`/PosicaoPorLinha?CodigoLinha=${searchValue}`).then( res => {
-					setPosicoes(res.data.vs);
 					handleMetaData(true, res.data.hr);
+					setPosicoes(res.data.vs);
+					handleAgoraNoMapa(`Todos os ônibus da linha ${searchValue}`)
 					dispatch(mapCenterZoom({
 						center: {
 							lat: res.data.vs[0].py,
 							lng: res.data.vs[0].px
 						},
-						zoom: 13
+						zoom: 14
 					}))
 
 				}).catch(err => {
@@ -131,18 +126,18 @@ const GMap: React.FC = () => {
 				})
 
 				api.get(`/ParadasPorLinha?CodigoLinha=${searchValue}`).then( res => {
-					console.log("Paradas QUERY_PARADAS_CODIGO_LINHA", res.data);
 					setParadas(res.data);
-					// handleMetaData(false, ';')
 				}).catch(err => {
 					console.log(err)
 				})
 				break
-			// SHOW CARS BY FORECAST ARRIVAL TIME
+
+			// SHOW BUSES BY FORECAST ARRIVAL TIME
 			case 'QUERY_PREVISAO_POR_PARADA':
 				api.get(`/PrevisaoPorParada?CodigoParada=${searchValue}`).then( res => {
-					setPosicoes(res.data.p.l);
 					handleMetaData(false, res.data.hr);
+					setPosicoes(res.data.p.l);
+					handleAgoraNoMapa(`Todos os ônibus em direção a ${searchValue}`)
 				}).catch(err => {
 					console.log(err)
 				})
@@ -161,8 +156,9 @@ const GMap: React.FC = () => {
 		switch (searchType){
 			case 'QUERY_BUSCAR_PARADA':
 				api.get(`/Paradas?busca=${searchValue}`).then( res => {
-					setParadas(res.data)
 					handleMetaData(true)
+					setParadas(res.data)
+					handleAgoraNoMapa(`Todas as paradas, ${searchValue}`)
 					// TODO: ADD WARNING INFO WHEN STOPS COUND'T BE FOUND
 					if (paradas.length > 0){
 						dispatch(mapCenterZoom({
@@ -183,43 +179,27 @@ const GMap: React.FC = () => {
 	
 
 	useEffect( () => {
-		// updateMetaData()
-
 		dispatch(mapData({
 			metaInfo: {
 				totalCars: metaData.totalCarsLoaded,
 				updateTime: metaData.timeLoaded,
-				totalParadas: metaData.totalParadas
+				totalParadas: metaData.totalParadas,
+				agoraNoMapa: metaData.agoraNoMapa
 			}
 		}))
 	}, [metaData, dispatch])
 
 	const [ infoWindowsSelectBus, setInfoWindowsBus] = useState(() =>{
-		let busMarker: BusGeo = {
-			ta: '',
-			a: false,
-			p: 0,
-			px: 0,
-			py: 0 
-		};
+		let busMarker: BusGeo = { ta: '', a: false, p: 0, px: 0, py: 0 };
 		let select = false;
 		return {busMarker, select}
-	}
-	);
+	});
 
 	const [ infoWindowsSelectParadas, setInfoWindowsParadas] = useState(() =>{
-		let paradasMarker: ParadasTypes = {
-			cp: 0,
-			np: '',
-			ed: '',
-			px: 0,
-			py: 0
-
-		};
+		let paradasMarker: ParadasTypes = { cp: 0, np: '', ed: '', px: 0, py: 0 };
 		let select = false;
 		return {paradasMarker, select}
-	}
-	);
+	});
 
 	const handleSelectInfoWindowBus = (bus: BusGeo, state:boolean = false) => {
 		setInfoWindowsBus({busMarker: bus, select: state})
@@ -260,7 +240,6 @@ const GMap: React.FC = () => {
 								scaledSize: {height:30, width:30},
 							}}
 						/>
-					
 					))
 				};
 
@@ -271,7 +250,6 @@ const GMap: React.FC = () => {
 								onLoad={() => handleMetaData(false, '', true , false)}
 								key={bus.p} 
 								position={ { lat: bus.py, lng: bus.px } }
-								
 							/>
 						))
 					))
@@ -288,9 +266,9 @@ const GMap: React.FC = () => {
 								url: '/bus-stop.svg',
 								scaledSize: {height:30, width:30},
 							}}
-						/>
-						
-				))};
+						/>		
+					))
+				};
 
 				{((searchType === 'QUERY_BUSCAR_PARADA') || (searchType === 'QUERY_PREVISAO_POR_PARADA')) &&
 					paradas.map( ( parada : ParadasTypes ) => (
@@ -304,14 +282,8 @@ const GMap: React.FC = () => {
 								scaledSize: {height:30, width:30},
 							}}
 						/>
-					
 					))
 				}
-
-				{/* <Polyline
-					path={path}
-					options={options}
-				/> */}
 
 				{/* INFO WINDOWS CARS */}
 				{infoWindowsSelectBus.select ? (

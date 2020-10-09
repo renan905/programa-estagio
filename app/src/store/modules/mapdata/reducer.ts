@@ -5,8 +5,10 @@ const initialState: MapDataState = {
 	metaInfo: {
 		totalCars: 0,
 		totalParadas: 0,
-		updateTime: ""
+		updateTime: "",
+		agoraNoMapa: '',
 	}
+	
 }
 
 export default function mapdata( state = initialState, action: MapDataAction): MapDataState {
@@ -17,9 +19,10 @@ export default function mapdata( state = initialState, action: MapDataAction): M
 				metaInfo: {
 					totalCars: action.payload.metaInfo.totalCars,
 					updateTime: action.payload.metaInfo.updateTime,
-					totalParadas: action.payload.metaInfo.totalParadas
+					totalParadas: action.payload.metaInfo.totalParadas,
+					agoraNoMapa: action.payload.metaInfo.agoraNoMapa
 				}
-            }
+			}
         default:
             return state;
     }

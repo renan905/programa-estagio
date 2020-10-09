@@ -1,6 +1,6 @@
 import React  from 'react';
 
-import { Grid } from '@material-ui/core';
+import { Grid, CircularProgress } from '@material-ui/core';
 
 import Sidebar from '../components/Sidebar';
 import GMap from '../components/GMap'
@@ -11,6 +11,9 @@ import "./app.css";
 function App() {
 	return (
 		<>
+		<div className='load'>
+			<CircularProgress color='secondary' />
+		</div>
 		<Grid container>
 			<Grid item xs={12}>
 				<div className='topbar'>
