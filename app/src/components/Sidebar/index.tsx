@@ -24,11 +24,14 @@ const Sidebar: React.FC = () => {
 	const [paradasDetalhes, setParadasDetalhes] = useState(false);
 
 	const [value, setValue] = useState(0);
+	
 	const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
 		setValue(newValue);
+		setParadasDetalhes(false);
 
 	};
 
+	const { searchValue, searchType } = useSelector((state: StoreState) => state.search)
     // HANDLE THE SEARCH INPUT VALUE
     // const { searchValue } = useSelector((state: StoreState) => state.search)
     const dispatch = useDispatch();
@@ -47,7 +50,7 @@ const Sidebar: React.FC = () => {
 
             dispatch(searchInput({
 				searchValue: searchString,
-				searchType: type
+				searchType: type,
 			}))
         }
 	}
@@ -64,7 +67,7 @@ const Sidebar: React.FC = () => {
 	const [ linhas, setLinhas] = useState([]);
 	const [ paradas, setParadas] = useState([]);
 
-	const { searchValue, searchType } = useSelector((state: StoreState) => state.search)
+	
 	useEffect(() => {
 		switch (searchType){
 			case 'QUERY_BUSCAR_LINHA':
@@ -149,6 +152,15 @@ const Sidebar: React.FC = () => {
 			
 			{/* LINES SEARCH LIST */}
 			<div role="tabpanel" hidden={value !== 0} id={`${value}`} >
+				<div className='noSearch' style={{display: (linhas.length > 0) ? 'none' : 'flex'}}>
+					<p>A categoria Linhas possibilita a consulta pelas linhas de ônibus da cidade de São Paulo.</p>
+					<p>Você pode buscar pelo número da linha ou por algum termo relacionada a linha.</p>
+					<div className='exemplo'>
+						<p>Exemplos:</p>
+						<p>33752</p>
+						<p>São Matheus</p>
+					</div>
+				</div>
 				{linhas.map( (linhas : LinhasTypes) => (
 					<div className='linhaContainer' key={linhas.cl}>
 					<Paper className="linhaCard" onClick={(e) => handleLoadCarByLinhas(e, linhas)}>
@@ -176,6 +188,15 @@ const Sidebar: React.FC = () => {
 
 			
 			<div role="tabpanel" hidden={(value !== 1) || (paradasDetalhes)} id={`${value}`}>
+				<div className='noSearch' style={{display: (paradas.length > 0) ? 'none' : 'flex'}}>
+					<p>A categoria Paradas possibilita a consulta pelos pontos de parada da cidade de São Paulo. Atualmente esta categoria contempla apenas as paradas de corredores.</p>
+					<p>Você pode buscar pelo nome da parada e também no seu endereço de localização.</p>
+					<div className='exemplo'>
+						<p>Exemplos:</p>
+						<p>Afonso</p>
+						<p>Balthazar da Veiga</p>
+					</div>
+				</div>
 				{paradas.map( (parada : ParadasTypes) => (
 					<div className='paradaContainer' key={parada.cp} >
 						<Paper className="paradaCard" onClick={() => handleLoadParadas(parada)}>
@@ -192,7 +213,7 @@ const Sidebar: React.FC = () => {
 			{/* PARADAS INFO */}
 			{(paradasDetalhes) &&
 			<div className='flip-horizontal-bottom previsõesParada'> 
-				<IconButton className='closePrevisoes'  onClick={() =>  setParadasDetalhes(false)}><Cancel/></IconButton>
+				<IconButton className='closePrevisoes'  onClick={() => setParadasDetalhes(false)}><Cancel/></IconButton>
 				{(posicoes.length > 0) &&
 					posicoes.map( ( dataLinhas : BusLinhas ) => (
 

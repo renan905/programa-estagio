@@ -6,4 +6,5 @@ export type SearchAction = ActionType<typeof actions>;
 export interface SearchState {
 	readonly searchValue: string;
 	readonly searchType: string;
+	readonly searchUpdate: boolean;
 }

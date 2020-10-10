@@ -445,3 +445,19 @@ slide-top {
 		color: dimgray;
 	}
 }
+
+
+.noSearch {
+	padding: 30px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+
+	.exemplo {
+		font-size: 14px;
+		font-style: oblique;
+		text-align: left;
+	}
+}

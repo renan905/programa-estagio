@@ -4,6 +4,7 @@ import { SearchAction, SearchState } from "./types";
 const initialState: SearchState = {
 	searchValue: '',
 	searchType: '',
+	searchUpdate: false,
 }
 
 export default function search( state = initialState, action: SearchAction): SearchState {
@@ -12,8 +13,15 @@ export default function search( state = initialState, action: SearchAction): Sea
             return {
                 ...state,
 				searchValue: action.payload.searchValue,
-				searchType: action.payload.searchType
-            }
+				searchType: action.payload.searchType,
+				
+			}
+			
+		case '@search/SEARCH_UPDATE':
+			return {
+				...state,
+				searchUpdate: action.payload.searchUpdate
+			}
         
         default:
             return state;

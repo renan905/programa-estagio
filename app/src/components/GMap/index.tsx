@@ -20,24 +20,24 @@ const GMap: React.FC = () => {
 	const dispatch = useDispatch();
 	const [ loading, setLoading ] = useState(false);
 
+	const { searchValue, searchType, searchUpdate } = useSelector((state: StoreState) => state.search)
 	// AUTO UPDATE
-	const [ update, setUpdate] = useState(() => { return false});
-	// useEffect(() => {
-	// 	setInterval(() => {
-	// 	console.log("atualizando")
-	// 		setUpdate( currValue => { return currValue ? false : true});
-	// 	}, 60000);
-	// });
-
-	// setTimeout(() => {
-	// 	console.log("atualizando")
-	// 	setUpdate( currValue => { return currValue ? false : true});
-	// }, 60000);
+	const [ update, setUpdate] = useState( () => { return { state: false, time: (searchType === 'QUERY_DISPLAY_ALL' ) ? 60000 : 30000 } });
+	useEffect(() => {
+		if (searchUpdate) {
+			const interval = setInterval(() => {
+				setUpdate( prev => {
+					return {
+						...prev,
+						state: (update.state) ? false : true
+					}}
+			)}, update.time);
+			return () => clearInterval(interval);
+		}
+	}, [searchUpdate, update.state]);
 	
-
 	// MAP CONFIG
 	const { center, mapStyle, zoom } = useSelector((state: StoreState) => state.mapconfig)
-
 
 
 	// * NUMBER OF CARS, STOPS, LOCATION AND TIME HANDLER
@@ -91,12 +91,9 @@ const GMap: React.FC = () => {
 		});
 	}
 
-
-
-	const { searchValue, searchType } = useSelector((state: StoreState) => state.search)
+	
     const [ posicoes, setPosicoes] = useState([]);
 	useEffect(() => {
-		
 		switch (searchType){
 			
 			// SHOW ALL BUSES
@@ -125,7 +122,6 @@ const GMap: React.FC = () => {
 						},
 						zoom: 14
 					}))
-
 				}).catch(err => {
 					console.log(err)
 				})
@@ -156,8 +152,10 @@ const GMap: React.FC = () => {
 
 			default:
 				break
-		}		
-	}, [searchValue, searchType, update, dispatch]);
+		}
+
+
+	}, [searchValue, searchType, update.state, searchUpdate, dispatch]);
 
 
 	// ! PARADAS
@@ -186,7 +184,7 @@ const GMap: React.FC = () => {
 				break
 
 		}		
-	}, [searchValue, searchType, update, dispatch]);
+	}, [searchValue, searchType, update.state, dispatch]);
 	
 
 	useEffect( () => {
