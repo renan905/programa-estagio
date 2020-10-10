@@ -5,6 +5,7 @@ const initialState: SearchState = {
 	searchValue: '',
 	searchType: '',
 	searchUpdate: false,
+	searchNoResults: false,
 }
 
 export default function search( state = initialState, action: SearchAction): SearchState {
@@ -21,6 +22,12 @@ export default function search( state = initialState, action: SearchAction): Sea
 			return {
 				...state,
 				searchUpdate: action.payload.searchUpdate
+			}
+
+		case '@search/SEARCH_NO_RESULTS':
+			return {
+				...state,
+				searchNoResults: action.payload.searchNoResults
 			}
         
         default:

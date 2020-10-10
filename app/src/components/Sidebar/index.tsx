@@ -2,9 +2,9 @@ import React, { ChangeEvent, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { TextField, IconButton, Tabs, Tab, AppBar, Paper, InputBase, Divider, Switch, FormControlLabel } from '@material-ui/core';
-import { Info, Search, ArrowRight, Cancel, ArrowRightAlt } from '@material-ui/icons';
+import { Info, Search, ArrowRight, Cancel, ArrowRightAlt, Warning } from '@material-ui/icons';
 
-import { searchInput } from '../../store/modules/search/actions';
+import { searchInput, searchNoResult } from '../../store/modules/search/actions';
 import { StoreState } from '../../store/createStore';
 
 import { LinhasTypes, ParadasTypes } from './types';
@@ -20,6 +20,7 @@ import { mapData } from '../../store/modules/mapdata/actions';
 
 const Sidebar: React.FC = () => {
 
+	const dispatch = useDispatch();
 
 	const [paradasDetalhes, setParadasDetalhes] = useState(false);
 
@@ -28,16 +29,16 @@ const Sidebar: React.FC = () => {
 	const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
 		setValue(newValue);
 		setParadasDetalhes(false);
+		dispatch(searchNoResult({searchNoResults: false}))
 
 	};
 
-	const { searchValue, searchType } = useSelector((state: StoreState) => state.search)
+	const { searchValue, searchType, searchNoResults } = useSelector((state: StoreState) => state.search)
     // HANDLE THE SEARCH INPUT VALUE
     // const { searchValue } = useSelector((state: StoreState) => state.search)
-    const dispatch = useDispatch();
+    
     function handleSearchInput(searchString: string, type: string = '') {
         if (searchString !== '') {
-			
 			if (type === ''){
 				if (value === 0){
 					type = 'QUERY_BUSCAR_LINHA'
@@ -47,12 +48,12 @@ const Sidebar: React.FC = () => {
 					type = 'QUERY_DISPLAY_ALL'
 				}
 			}
-
             dispatch(searchInput({
 				searchValue: searchString,
 				searchType: type,
 			}))
         }
+
 	}
 	
     // HANDLE SEARCH INPUT FIELD
@@ -69,10 +70,17 @@ const Sidebar: React.FC = () => {
 
 	
 	useEffect(() => {
+		dispatch(searchNoResult({searchNoResults: false}))
 		switch (searchType){
+
 			case 'QUERY_BUSCAR_LINHA':
 				api.get(`/BuscarLinha?busca=${searchValue}`).then( res => {
-					setLinhas(res.data)
+					if (res.data <= 0 ){
+						dispatch(searchNoResult({searchNoResults: true}))
+					} else {
+						setLinhas(res.data)
+					}
+					
 				})
 				break
 			case 'QUERY_BUSCAR_PARADA':
@@ -92,7 +100,7 @@ const Sidebar: React.FC = () => {
 			default:
 				break
 		}		
-	}, [searchValue, searchType]);
+	}, [searchValue, searchType, dispatch]);
 
 	const handleLoadCarByLinhas = (_e: React.MouseEvent<HTMLDivElement, MouseEvent>, data: LinhasTypes) => {
 		handleSearchInput(data.cl.toString(), 'QUERY_POSICAO_POR_LINHA');
@@ -162,15 +170,20 @@ const Sidebar: React.FC = () => {
 			
 			{/* LINES SEARCH LIST */}
 			<div role="tabpanel" hidden={value !== 0} id={`${value}`} >
-				<div className='noSearch' style={{display: (linhas.length > 0) ? 'none' : 'flex'}}>
+				<div className='noSearch' style={{display: ((linhas.length > 0) || searchNoResults) ? 'none' : 'flex'}}>
 					<p>A categoria Linhas possibilita a consulta pelas linhas de ônibus da cidade de São Paulo.</p>
 					<p>Você pode buscar pelo número da linha ou por algum termo relacionada a linha.</p>
 					<div className='exemplo'>
 						<p>Exemplos:</p>
-						<p>33752</p>
 						<p>São Matheus</p>
 					</div>
 				</div>
+
+				<div className='nothingFound' style={{display: (searchNoResults) ? 'flex' : 'none'}} >
+					<Warning/>
+					<h1>Nenhuma linha foi encontrada</h1>
+				</div>
+
 				{linhas.map( (linhas : LinhasTypes) => (
 					<div className='linhaContainer' key={linhas.cl}>
 					<Paper className="linhaCard" onClick={(e) => handleLoadCarByLinhas(e, linhas)}>
@@ -198,7 +211,7 @@ const Sidebar: React.FC = () => {
 
 			
 			<div role="tabpanel" hidden={(value !== 1) || (paradasDetalhes)} id={`${value}`}>
-				<div className='noSearch' style={{display: (paradas.length > 0) ? 'none' : 'flex'}}>
+				<div className='noSearch' style={{display: ((paradas.length > 0) || searchNoResults) ? 'none' : 'flex'}}>
 					<p>A categoria Paradas possibilita a consulta pelos pontos de parada da cidade de São Paulo. Atualmente esta categoria contempla apenas as paradas de corredores.</p>
 					<p>Você pode buscar pelo nome da parada e também no seu endereço de localização.</p>
 					<div className='exemplo'>
@@ -207,6 +220,12 @@ const Sidebar: React.FC = () => {
 						<p>Balthazar da Veiga</p>
 					</div>
 				</div>
+
+				<div className='nothingFound' style={{display: (searchNoResults) ? 'flex' : 'none'}} >
+					<Warning/>
+					<h1>Nenhuma parada foi encontrada</h1>
+				</div>
+
 				{paradas.map( (parada : ParadasTypes) => (
 					<div className='paradaContainer' key={parada.cp} >
 						<Paper className="paradaCard" onClick={() => handleLoadParadas(parada)}>

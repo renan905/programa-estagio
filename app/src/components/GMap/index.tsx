@@ -14,6 +14,7 @@ import { ParadasTypes } from '../Sidebar/types';
 import "./map.css";
 import { CircularProgress, Paper } from '@material-ui/core';
 import { Accessible, AccessTime, AirportShuttle, Map } from '@material-ui/icons';
+import { searchNoResult } from '../../store/modules/search/actions';
 
 
 const GMap: React.FC = () => {
@@ -39,7 +40,6 @@ const GMap: React.FC = () => {
 	
 	// MAP CONFIG
 	const { center, mapStyle, zoom } = useSelector((state: StoreState) => state.mapconfig)
-
 
 	// * NUMBER OF CARS, STOPS, LOCATION AND TIME HANDLER
 	const [ metaData, setMetaData ] = useState(() => {
@@ -95,15 +95,19 @@ const GMap: React.FC = () => {
 	
     const [ posicoes, setPosicoes] = useState([]);
 	useEffect(() => {
+		dispatch(searchNoResult({searchNoResults: false}))
 		switch (searchType){
-			
 			// SHOW ALL BUSES
 			case 'QUERY_DISPLAY_ALL':
 				setLoading(true)
 				api.get("/Posicao").then( res => {
 					handleMetaData(true, res.data.hr);
-					setPosicoes(res.data.l);
-					handleAgoraNoMapa("OVERVIEW - Todos os ônibus de São Paulo")
+					if (res.data.l.length <= 0 ) {
+						dispatch(searchNoResult({searchNoResults: true}))
+					} else {
+						setPosicoes(res.data.l);
+						handleAgoraNoMapa("OVERVIEW - Todos os ônibus de São Paulo")
+					}
 					
 				}).catch( err => {
 					console.log(err)
@@ -114,15 +118,20 @@ const GMap: React.FC = () => {
 			case 'QUERY_POSICAO_POR_LINHA':
 				api.get(`/PosicaoPorLinha?CodigoLinha=${searchValue}`).then( res => {
 					handleMetaData(true, res.data.hr);
-					setPosicoes(res.data.vs);
-					handleAgoraNoMapa(`Todos os ônibus da linha ${searchValue}`)
-					dispatch(mapCenterZoom({
-						center: {
-							lat: res.data.vs[0].py,
-							lng: res.data.vs[0].px
-						},
-						zoom: 14
-					}))
+					if (res.data.vs.length <= 0 ) {
+						dispatch(searchNoResult({searchNoResults: true}))
+					} else {
+						setPosicoes(res.data.vs);
+						handleAgoraNoMapa(`Todos os ônibus da linha ${searchValue}`)
+						dispatch(mapCenterZoom({
+							center: {
+								lat: res.data.vs[0].py,
+								lng: res.data.vs[0].px
+							},
+							zoom: 14
+						}))
+					}
+					
 				}).catch(err => {
 					console.log(err)
 				})
@@ -138,8 +147,13 @@ const GMap: React.FC = () => {
 			case 'QUERY_PREVISAO_POR_PARADA':
 				api.get(`/PrevisaoPorParada?CodigoParada=${searchValue}`).then( res => {
 					handleMetaData(false, res.data.hr);
-					setPosicoes(res.data.p.l);
-					handleAgoraNoMapa(`Todos os ônibus em direção a ${searchValue}`)
+					if (res.data.p.length <= 0 ) {
+						dispatch(searchNoResult({searchNoResults: true}))
+					} else {
+						setPosicoes(res.data.p.l);
+						handleAgoraNoMapa(`Todos os ônibus em direção a ${searchValue}`)
+					}
+					
 				}).catch(err => {
 					console.log(err)
 				})
@@ -159,26 +173,29 @@ const GMap: React.FC = () => {
 	}, [searchValue, searchType, update.state, searchUpdate, dispatch]);
 
 
-	// ! PARADAS
 	const [ paradas, setParadas] = useState([]);
 	useEffect(() => {
-		
+		dispatch(searchNoResult({searchNoResults: false}))
 		switch (searchType){
 			case 'QUERY_BUSCAR_PARADA':
 				api.get(`/Paradas?busca=${searchValue}`).then( res => {
 					handleMetaData(true)
-					setParadas(res.data)
-					handleAgoraNoMapa(`Todas as paradas, ${searchValue}`)
-					// TODO: ADD WARNING INFO WHEN STOPS COUND'T BE FOUND
-					if (paradas.length > 0){
-						dispatch(mapCenterZoom({
-							center: {
-								lat: res.data[0].py,
-								lng: res.data[0].px
-							},
-							zoom: 15
-						}))
+					if (res.data.length <= 0 ) {
+						dispatch(searchNoResult({searchNoResults: true}))
+					} else {
+						setParadas(res.data)
+						handleAgoraNoMapa(`Todas as paradas, ${searchValue}`)
+						if (paradas.length > 0){
+							dispatch(mapCenterZoom({
+								center: {
+									lat: res.data[0].py,
+									lng: res.data[0].px
+								},
+								zoom: 15
+							}))
+						}
 					}
+					
 				})
 				break
 			default:

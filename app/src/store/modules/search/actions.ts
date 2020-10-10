@@ -12,3 +12,9 @@ export function searchAutoUpdate(  { searchUpdate } : { searchUpdate: boolean } 
 		searchUpdate,
     })
 }
+
+export function searchNoResult(  { searchNoResults } : { searchNoResults: boolean } ) {
+    return action('@search/SEARCH_NO_RESULTS', {
+		searchNoResults,
+    })
+}
