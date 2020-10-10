@@ -569,4 +569,64 @@ slide-top {
 .nothingFound h1 {
   font-size: 18px;
 }
+
+.opcoes {
+  margin: 25px;
+}
+
+.opcoes .autoUpdate {
+  margin: 10px;
+}
+
+.opcoes .infoProjeto {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.opcoes .infoProjeto .dados {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.opcoes .infoProjeto .dados img {
+  display: block;
+  width: 40%;
+  height: auto;
+}
+
+.opcoes .infoProjeto .titulo {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.opcoes .infoProjeto .nome {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.opcoes .infoProjeto .descritivo {
+  font-size: 14px;
+  font-weight: normal;
+  margin: 5px;
+  text-align: center;
+}
 /*# sourceMappingURL=sidebar.css.map */

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,IAAI,CAAC;EACJ,MAAM,EAAE,IAAI;EAEZ,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,GAAG;EACnB,WAAW,EAAE,MAAM;EACnB,eAAe,EAAE,MAAM;EACvB,aAAa,EAAE,MAAM;CAMrB;;AAbD,AASC,IATG,CASH,UAAU,CAAC;EACV,WAAW,EAAE,IAAI;EACjB,YAAY,EAAE,IAAI;CAClB",
+    "sources": [
+        "bottombar.scss"
+    ],
+    "names": [],
+    "file": "bottombar.css"
+}

@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { GoogleMap, InfoWindow, LoadScript, Marker, Polyline } from "@react-google-maps/api";
+import { GoogleMap, InfoWindow, LoadScript, Marker } from "@react-google-maps/api";
 
 import api from '../../services/api';
 import { mapData } from '../../store/modules/mapdata/actions';
-import mapconfig from '../../store/modules/mapconfig/reducer';
 import { mapCenterZoom } from '../../store/modules/mapconfig/actions';
 import { StoreState } from '../../store/createStore';
 
-import { BusLinhas, BusGeo, PathOptions, GMapData } from './types'
+import { BusLinhas, BusGeo } from './types'
 import { ParadasTypes } from '../Sidebar/types';
 
 import "./map.css";
-import { CircularProgress, Paper } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import { Accessible, AccessTime, AirportShuttle, Map } from '@material-ui/icons';
 import { searchNoResult } from '../../store/modules/search/actions';
 
@@ -36,7 +35,7 @@ const GMap: React.FC = () => {
 			)}, update.time);
 			return () => clearInterval(interval);
 		}
-	}, [searchUpdate, update.state]);
+	}, [searchUpdate, update.state, update.time]);
 	
 	// MAP CONFIG
 	const { center, mapStyle, zoom } = useSelector((state: StoreState) => state.mapconfig)
@@ -202,7 +201,7 @@ const GMap: React.FC = () => {
 				break
 
 		}		
-	}, [searchValue, searchType, update.state, dispatch]);
+	}, [searchValue, searchType, update.state, paradas.length, dispatch]);
 	
 
 	useEffect( () => {

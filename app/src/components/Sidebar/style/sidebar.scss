@@ -477,3 +477,52 @@ slide-top {
 		font-size: 18px;
 	}
 }
+
+.opcoes {
+	margin: 25px;
+	
+	.autoUpdate {
+		margin: 10px;
+	}
+
+	.infoProjeto {
+		margin-top: 30px;
+		margin-bottom: 15px;
+		display: flex;
+		flex-direction: column;
+		justify-items: center;
+		align-items: center;
+
+		.dados {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			img {
+				display: block;
+				width: 40%;
+				height: auto;
+			  }
+		}
+
+		
+		.titulo {
+			font-size: 16px;
+			font-weight: bold;
+		}
+
+		.nome {
+			font-size: 16px;
+			font-weight: bold;
+		}
+
+		.descritivo {
+			font-size: 14px;
+			font-weight: normal;
+			margin: 5px;
+			text-align: center;
+		}
+	}
+
+
+}

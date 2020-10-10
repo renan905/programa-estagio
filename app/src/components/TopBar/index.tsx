@@ -1,26 +1,18 @@
 import React from 'react';
 
-import { Badge, FormControlLabel, Switch } from '@material-ui/core';
-import { DirectionsBus, Update, GolfCourse } from '@material-ui/icons' ;
+import { Badge } from '@material-ui/core';
+import { DirectionsBus, Update, GolfCourse, Cached } from '@material-ui/icons' ;
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { StoreState } from '../../store/createStore';
 
 import './topbar.css';
-import { searchAutoUpdate } from '../../store/modules/search/actions';
 
 const TopBar: React.FC = () => {
 
 	// MAP CONFIG
 	const { totalCars, updateTime, totalParadas, agoraNoMapa } = useSelector((state: StoreState) => state.mapdata.metaInfo)
 	const { searchType, searchUpdate } = useSelector((state: StoreState) => state.search)
-
-	const dispatch = useDispatch();
-	const handleSearchUpdadeState = () => {
-		dispatch(searchAutoUpdate({
-			searchUpdate: (searchUpdate) ? false : true
-		}))
-	}
 
 	
     return(
@@ -39,9 +31,10 @@ const TopBar: React.FC = () => {
 				<Badge className='iconStyle' color="secondary"  aria-label="Hora da Ultima Atualização" badgeContent={(updateTime === '') ? 0 : updateTime}>
 					<Update color='secondary'/>
 				</Badge>
-				<FormControlLabel className='iconStyle' onChange={handleSearchUpdadeState} control={<Switch/>} label={(searchUpdate) ? 'Desativar AutoUpdate' : 'Ativar AutoUpdate'} />
-
-
+				<div className='autoUpdate'>
+					<Cached color={(searchUpdate) ? 'secondary' : 'disabled' } />
+					<h1>{(searchUpdate) ? 'AutoUpdate Ativado' : 'AutoUpdate Desativado'}</h1>
+				</div>
 			</div>
 		</>
     );

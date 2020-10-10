@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { TextField, IconButton, Tabs, Tab, AppBar, Paper, InputBase, Divider, Switch, FormControlLabel } from '@material-ui/core';
-import { Info, Search, ArrowRight, Cancel, ArrowRightAlt, Warning } from '@material-ui/icons';
+import { IconButton, Tabs, Tab, AppBar, Paper, InputBase, Divider, Switch, FormControlLabel } from '@material-ui/core';
+import { Info, Search, ArrowRight, Cancel, ArrowRightAlt, Warning, GitHub } from '@material-ui/icons';
 
-import { searchInput, searchNoResult } from '../../store/modules/search/actions';
+import { searchAutoUpdate, searchInput, searchNoResult } from '../../store/modules/search/actions';
 import { StoreState } from '../../store/createStore';
 
 import { LinhasTypes, ParadasTypes } from './types';
@@ -13,10 +13,6 @@ import api from '../../services/api';
 import "./style/sidebar.css";
 import { mapCenterZoom } from '../../store/modules/mapconfig/actions';
 import { BusGeo, BusLinhas } from '../GMap/types';
-import { mapData } from '../../store/modules/mapdata/actions';
-
-
-
 
 const Sidebar: React.FC = () => {
 
@@ -33,7 +29,7 @@ const Sidebar: React.FC = () => {
 
 	};
 
-	const { searchValue, searchType, searchNoResults } = useSelector((state: StoreState) => state.search)
+	const { searchValue, searchType, searchNoResults, searchUpdate } = useSelector((state: StoreState) => state.search)
     // HANDLE THE SEARCH INPUT VALUE
     // const { searchValue } = useSelector((state: StoreState) => state.search)
     
@@ -146,6 +142,12 @@ const Sidebar: React.FC = () => {
 		}));
 	}
 
+	const handleSearchUpdadeState = () => {
+		dispatch(searchAutoUpdate({
+			searchUpdate: (searchUpdate) ? false : true
+		}))
+	}
+
 	
     return (
 		<>
@@ -156,15 +158,17 @@ const Sidebar: React.FC = () => {
 					<Tab label="Linhas" />
 					<Tab label="Paradas" />
 					<Tab label="Overview" />
+					<Tab label="Opções" hidden />
+					
 				</Tabs>
 			</AppBar>
 
 			{/* SEARCH CONTAINER */}
-            <div className='searchContainer' id='searchBox'  style={{display: (value === 2) ? 'none' : 'flex'}}>
+            <div className='searchContainer' id='searchBox'  style={{display: (value === 2 || value === 3) ? 'none' : 'flex'}}>
 				<Paper className='paper' component="form">
 					<IconButton><Info/></IconButton>
 					<InputBase onChange={handleSearchInputValue} id="outlined-basic" placeholder={(value === 0) ? 'Buscar Linha': 'Buscar Parada'}/>
-					<IconButton onClick={() => handleSearchInput(searchInputValue)} aria-label="delete" color="primary"><Search/></IconButton>
+					<IconButton onClick={() => handleSearchInput(searchInputValue)} aria-label="delete" color="secondary"><Search/></IconButton>
 				</Paper>
 			</div>
 			
@@ -293,7 +297,31 @@ const Sidebar: React.FC = () => {
 						<FormControlLabel onChange={handleOverView} control={<Switch/>} label={(overview) ? 'Desativar Overview' : 'Ativar Overview'} />
 					</Paper>
 				</div>
-				
+			</div>
+
+			<div role="tabpanel" hidden={value !== 3} id={`${value}`} >
+				<div className='opcoes'>
+					<Paper>
+						<FormControlLabel className='autoUpdate' onChange={handleSearchUpdadeState} control={<Switch/>} label={(searchUpdate) ? 'Desativar AutoUpdate' : 'Ativar AutoUpdate'} />
+					</Paper>
+					<Paper className='infoProjeto'>
+						<h2 className='titulo'>Fonte de dados</h2>
+						<div className='dados'>
+							<img src='./SPTrans_logo.png' alt="Logo SpTrans"></img>
+							<h1 className='descritivo'>Todos os dados são obtidos através da API DO OLHO VIVO da SPTrans </h1>
+						</div>
+					</Paper>
+					<Paper className='infoProjeto'>
+						<a href='https://github.com/renan905/programa-estagio' target='blank' ><GitHub/></a>
+						<h1 className='descritivo'>Todo o codigo deste projeto esta disponível no github</h1>
+					</Paper>
+
+					<Paper className='infoProjeto'>
+						<h2 className='descritivo'>São Paulo Bus Traker foi desenvolvidor por</h2>
+						<h1 className='nome'>Renan Lopes</h1>
+					</Paper>
+
+				</div>
 			</div>
 		</>
     );

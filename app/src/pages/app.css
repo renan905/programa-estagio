@@ -19,6 +19,12 @@ html, body {
   height: calc(100vh - 50px);
 }
 
+@media (max-width: 760px) {
+  .sidebar {
+    max-height: 500px;
+  }
+}
+
 .gmap {
   background-color: #FAFAFA;
   height: calc(100vh - 50px);
@@ -43,5 +49,18 @@ html, body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+@media (min-width: 760px) {
+  .bottombar {
+    height: 40px;
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .topbar {
+    display: none;
+  }
 }
 /*# sourceMappingURL=app.css.map */

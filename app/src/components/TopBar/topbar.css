@@ -5,11 +5,11 @@
 }
 
 .agoraNoMapa .label {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .agoraNoMapa .local {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
 }
 
@@ -34,5 +34,21 @@
 .infoAreas .iconStyle {
   margin-left: 20px;
   margin-right: 20px;
+}
+
+.infoAreas .autoUpdate {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.infoAreas .autoUpdate h1 {
+  margin-left: 10px;
+  font-size: 14px;
 }
 /*# sourceMappingURL=topbar.css.map */
