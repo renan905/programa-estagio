@@ -128,6 +128,16 @@ const Sidebar: React.FC = () => {
 		}
 	}
 
+	const handleNewCenter = (data: BusGeo) => {
+		dispatch(mapCenterZoom({
+			center: {
+				lat: data.py,
+				lng: data.px
+			},
+			zoom: 16
+		}));
+	}
+
 	
     return (
 		<>
@@ -233,7 +243,7 @@ const Sidebar: React.FC = () => {
 								
 							<div className='preivsaoLinha'>
 								{dataLinhas.vs.map( ( bus: BusGeo) => (
-									<div key={bus.p} className='previsoes'>
+									<div key={bus.p} className='previsoes' onClick={() => handleNewCenter(bus)}>
 										<div className='onibus'>
 											<p className='onibusNome'>ônibus</p>
 											<h3 className="codOnibus">{bus.p}</h3>
@@ -243,6 +253,7 @@ const Sidebar: React.FC = () => {
 											<p className='labelPrevisao'>Previsão de chegada</p>
 											<h3 className='horaPrevisao'>{bus.t}</h3>
 										</div>
+										<IconButton className='viewLinhas'><ArrowRight/></IconButton>
 									</div>
 								))}
 							</div>

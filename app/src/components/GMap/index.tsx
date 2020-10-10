@@ -12,7 +12,8 @@ import { BusLinhas, BusGeo, PathOptions, GMapData } from './types'
 import { ParadasTypes } from '../Sidebar/types';
 
 import "./map.css";
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Paper } from '@material-ui/core';
+import { Accessible, AccessTime, AirportShuttle, Map } from '@material-ui/icons';
 
 
 const GMap: React.FC = () => {
@@ -200,14 +201,14 @@ const GMap: React.FC = () => {
 	}, [metaData, dispatch])
 
 	const [ infoWindowsSelectBus, setInfoWindowsBus] = useState(() =>{
-		let busMarker: BusGeo = { ta: '', a: false, p: 0, px: 0, py: 0 };
-		let select = false;
+		const busMarker: BusGeo = { ta: '', a: false, p: 0, px: 0, py: 0 };
+		const select = false;
 		return {busMarker, select}
 	});
 
 	const [ infoWindowsSelectParadas, setInfoWindowsParadas] = useState(() =>{
-		let paradasMarker: ParadasTypes = { cp: 0, np: '', ed: '', px: 0, py: 0 };
-		let select = false;
+		const paradasMarker: ParadasTypes = { cp: 0, np: '', ed: '', px: 0, py: 0 };
+		const select = false;
 		return {paradasMarker, select}
 	});
 
@@ -217,6 +218,11 @@ const GMap: React.FC = () => {
 
 	const handleSelectInfoWindowParada = (parada: ParadasTypes, state:boolean = false) => {
 		setInfoWindowsParadas({paradasMarker: parada, select: state})
+	}
+
+	function handleIsoTimeParse(isoTime: string) : string {
+		const time = new Date(isoTime);
+		return `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`
 	}
 
     return (
@@ -308,9 +314,10 @@ const GMap: React.FC = () => {
 					position={{lat: infoWindowsSelectBus.busMarker.py, lng:infoWindowsSelectBus.busMarker.px}}
 					onCloseClick={() => handleSelectInfoWindowBus(infoWindowsSelectBus.busMarker, false)}
 					>
-						<div>
-							<h1>acessível para pessoas com deficiência: {infoWindowsSelectBus.busMarker.a ? "SIM" : "NÃO"}</h1>
-							<h1>{infoWindowsSelectBus.busMarker.p} </h1>
+						<div className='busInfoBox'>
+							<h1><AirportShuttle/> Prefixo do veículo: <strong className='status'>{infoWindowsSelectBus.busMarker.p}</strong></h1>
+							<h1><Accessible/> Suporte à Acessibilidade: <strong className='status'>{infoWindowsSelectBus.busMarker.a ? "SIM" : "NÃO"}</strong></h1>	
+							<h1><AccessTime/> Atualizado as : <strong className='status'>{handleIsoTimeParse(infoWindowsSelectBus.busMarker.ta)}</strong></h1>
 						</div>
 					</InfoWindow>
 				) : null}
@@ -321,9 +328,9 @@ const GMap: React.FC = () => {
 					position={{lat: infoWindowsSelectParadas.paradasMarker.py, lng:infoWindowsSelectParadas.paradasMarker.px}}
 					onCloseClick={() => handleSelectInfoWindowParada(infoWindowsSelectParadas.paradasMarker, false)}
 					>
-						<div>
-							<h1>Nome: {infoWindowsSelectParadas.paradasMarker.cp}</h1>
-							<h1>Endereço: {infoWindowsSelectParadas.paradasMarker.ed}</h1>
+						<div className='busInfoBox'>
+							<h1>Parada:  <strong className='status'>{infoWindowsSelectParadas.paradasMarker.np}</strong></h1>
+							<h1><Map/> Endereço:  <strong className='status'>{infoWindowsSelectParadas.paradasMarker.ed}</strong></h1>
 						</div>
 					</InfoWindow>
 				) : null}

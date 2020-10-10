@@ -21,3 +21,18 @@
 	justify-content: center;
 }
 
+.busInfoBox {
+	display: flex;
+	flex-direction: column;
+
+	font-size: 8px;
+	font-weight: normal;
+	
+	.status{
+		font-weight: bold;
+		font-size: 18px;
+		color: #0F44FA;
+	}
+
+}
+

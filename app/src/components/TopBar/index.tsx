@@ -39,7 +39,7 @@ const TopBar: React.FC = () => {
 				<Badge className='iconStyle' color="secondary"  aria-label="Hora da Ultima Atualização" badgeContent={(updateTime === '') ? 0 : updateTime}>
 					<Update color='secondary'/>
 				</Badge>
-				<FormControlLabel onChange={handleSearchUpdadeState} control={<Switch/>} label={(searchUpdate) ? 'Desativar AutoUpdate' : 'Ativar AutoUpdate'} />
+				<FormControlLabel className='iconStyle' onChange={handleSearchUpdadeState} control={<Switch/>} label={(searchUpdate) ? 'Desativar AutoUpdate' : 'Ativar AutoUpdate'} />
 
 
 			</div>
