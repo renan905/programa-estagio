@@ -1,5 +1,5 @@
-import createStore from './createStore';
-import rootReducer from './modules/rootReducer'; 
+import createStore from "./createStore";
+import rootReducer from "./modules/rootReducer";
 
 const store = createStore(rootReducer, []);
 

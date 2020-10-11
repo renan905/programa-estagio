@@ -4,7 +4,6 @@ import { MapConfigState } from "./modules/mapconfig/types";
 import { MapDataState } from "./modules/mapdata/types";
 import { SearchAction, SearchState } from "./modules/search/types";
 
-
 export interface StoreState {
 	search: SearchState;
 	mapconfig: MapConfigState;
@@ -12,13 +11,13 @@ export interface StoreState {
 	linhas: LinhasState;
 }
 
-// StoreAction contem todos os tipos da store, 
-// export type StoreAction = SearchAction | ExemploAction | OutroAction
 export type StoreAction = SearchAction;
 
-export default (reducer: Reducer<StoreState, StoreAction>, middlewares: Middleware[]) => {
+export default (
+	reducer: Reducer<StoreState, StoreAction>,
+	middlewares: Middleware[]
+) => {
+	const enhancer = applyMiddleware(...middlewares);
 
-    const enhancer = applyMiddleware(...middlewares);
-
-    return createStore(reducer, enhancer);
-}
+	return createStore(reducer, enhancer);
+};

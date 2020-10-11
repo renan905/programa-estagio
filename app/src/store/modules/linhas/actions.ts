@@ -1,8 +1,8 @@
-import { action } from 'typesafe-actions';
-import { LinhasState } from './types';
+import { action } from "typesafe-actions";
+import { LinhasState } from "./types";
 
-export function linhas( { linhas } : LinhasState ){
-	return action('@linhas/LINHAS', {
-		linhas
-	})
+export function linhas({ linhas }: LinhasState) {
+	return action("@linhas/LINHAS", {
+		linhas,
+	});
 }

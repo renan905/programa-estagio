@@ -1,10 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-
-$base-color: #5075BF;
-$base-color-light: #19E3D2;
-$base-color-darker: #0F44FA;
-
+$base-color: #5075bf;
+$base-color-light: #19e3d2;
+$base-color-darker: #0f44fa;
 
 // MATERIAL UI TABS CUSTOM
 .tabsBar {
@@ -17,11 +15,10 @@ $base-color-darker: #0F44FA;
 }
 
 .sidebar {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 	background-color: #f5f5f5;
 	overflow: auto;
-    
 }
 
 .searchContainer {
@@ -34,7 +31,7 @@ $base-color-darker: #0F44FA;
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-bottom: 15px;
-	
+
 	.paper {
 		padding-left: 10px;
 		display: flex;
@@ -44,7 +41,6 @@ $base-color-darker: #0F44FA;
 }
 
 .linhaContainer {
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -66,13 +62,12 @@ $base-color-darker: #0F44FA;
 
 		// background-color:#F2F2F2;
 		border-radius: 4px;
-		
+
 		display: flex;
 		justify-content: space-evenly;
 		align-items: center;
 
 		.codigoLinha {
-
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -83,7 +78,7 @@ $base-color-darker: #0F44FA;
 			padding: 0;
 
 			.codLinha {
-				font-family: 'Roboto';
+				font-family: "Roboto";
 				font-weight: 500;
 				font-size: 10px;
 				margin: 0;
@@ -93,9 +88,9 @@ $base-color-darker: #0F44FA;
 			.nomeLinha {
 				color: $base-color-darker;
 				font-weight: bold;
-				font-family: 'Roboto';
+				font-family: "Roboto";
 				font-size: 16px;
-	
+
 				padding: 0;
 				margin-top: 0;
 				margin-bottom: 3px;
@@ -104,13 +99,10 @@ $base-color-darker: #0F44FA;
 		}
 
 		.infoParadas {
-
 			display: flex;
 			flex-direction: row;
 			align-items: center;
 			justify-content: center;
-
-			
 
 			.divider {
 				margin-right: 6px;
@@ -128,29 +120,23 @@ $base-color-darker: #0F44FA;
 					margin-right: 3px;
 					margin-left: 3px;
 					font-size: 10px;
-					font-family: 'Roboto';
+					font-family: "Roboto";
 					font-weight: bolder;
-
 				}
-	
+
 				.enderecoParada {
 					color: rga(0, 0, 0, 87%);
 					font-weight: normal;
-					font-family: 'Roboto';
+					font-family: "Roboto";
 					font-size: 10px;
-		
+
 					padding: 0;
 					margin-top: 0px;
 					margin-left: 5px;
 					margin-right: 5px;
 				}
-
 			}
-
-			
 		}
-		
-
 	}
 
 	.linhaCard:hover {
@@ -161,15 +147,12 @@ $base-color-darker: #0F44FA;
 }
 
 .paradaContainer {
-
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 
 	margin-bottom: 5px;
-
-	
 
 	.viewLinhas {
 		right: 3px;
@@ -184,7 +167,7 @@ $base-color-darker: #0F44FA;
 
 		margin-top: 5px;
 		margin-bottom: 5px;
-		
+
 		border-radius: 4px;
 
 		display: flex;
@@ -200,38 +183,33 @@ $base-color-darker: #0F44FA;
 		.nomeParada {
 			color: $base-color-darker;
 			font-weight: bold;
-			font-family: 'Roboto';
+			font-family: "Roboto";
 			font-size: 16px;
-	
+
 			padding: 0;
 			margin-left: 6px;
 		}
-	
+
 		.enderecoParada {
 			color: rga(0, 0, 0, 87%);
 			font-weight: normal;
-			font-family: 'Roboto';
+			font-family: "Roboto";
 			font-size: 10px;
-	
+
 			padding: 0;
 			margin-top: 0px;
 			margin-left: 5px;
 		}
 	}
-	
+
 	.paradaCard:hover {
 		transform: scale(1.09);
 		position: relative;
 		z-index: 1;
 	}
-
-}   
-
-
+}
 
 .previsõesParada {
-
-
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -241,14 +219,13 @@ $base-color-darker: #0F44FA;
 	margin-bottom: 5px;
 
 	.previsaoCard {
-
 		width: 300px;
 		height: auto;
 		min-height: 50px;
 
 		margin-top: 5px;
 		margin-bottom: 5px;
-		
+
 		border-radius: 4px;
 
 		display: flex;
@@ -267,11 +244,11 @@ $base-color-darker: #0F44FA;
 				margin-left: 10px;
 				height: 40px;
 			}
-		
+
 			.label {
 				font-size: 14px;
 				font-weight: bolder;
-				font-family: 'Roboto';
+				font-family: "Roboto";
 				text-align: center;
 
 				.infoStrong {
@@ -292,7 +269,7 @@ $base-color-darker: #0F44FA;
 			margin-right: 3px;
 			margin-left: 3px;
 			font-size: 10px;
-			font-family: 'Roboto';
+			font-family: "Roboto";
 			font-weight: bolder;
 			text-align: center;
 
@@ -301,13 +278,12 @@ $base-color-darker: #0F44FA;
 			align-items: center;
 			justify-items: center;
 
-
 			.enderecoPrevisao {
 				color: rga(0, 0, 0, 87%);
 				font-weight: normal;
-				font-family: 'Roboto';
+				font-family: "Roboto";
 				font-size: 12px;
-	
+
 				padding: 0;
 				margin-top: 0px;
 				margin-left: 5px;
@@ -322,26 +298,26 @@ $base-color-darker: #0F44FA;
 		.previsoes {
 			font-size: 12px;
 			margin-bottom: 20px;
-	
+
 			display: flex;
 			flex-direction: row;
 			align-items: center;
 			justify-content: space-between;
-	
+
 			.divider {
 				margin-right: 6px;
 				margin-left: 6px;
 				height: 40px;
 			}
-	
+
 			.onibus {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
-	
+
 				.onibusNome {
-					font-family: 'Roboto';
+					font-family: "Roboto";
 					text-align: center;
 					font-weight: 500;
 					font-size: 10px;
@@ -350,25 +326,24 @@ $base-color-darker: #0F44FA;
 				.codOnibus {
 					color: $base-color-darker;
 					font-weight: bold;
-					font-family: 'Roboto';
+					font-family: "Roboto";
 					font-size: 16px;
-		
+
 					padding: 0;
 					margin-top: 0;
 					margin-bottom: 3px;
 					margin-left: 5px;
 				}
 			}
-	
+
 			.chegada {
-	
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
-	
+
 				.labelPrevisao {
-					font-family: 'Roboto';
+					font-family: "Roboto";
 					font-weight: 500;
 					font-size: 10px;
 					margin: 0;
@@ -376,50 +351,45 @@ $base-color-darker: #0F44FA;
 				.horaPrevisao {
 					color: $base-color-darker;
 					font-weight: bold;
-					font-family: 'Roboto';
+					font-family: "Roboto";
 					font-size: 16px;
-		
+
 					padding: 0;
 					margin-top: 0;
 					margin-bottom: 3px;
 					margin-left: 5px;
 				}
-	
 			}
 		}
 	}
 }
 
-	
-
 slide-top {
-	-webkit-animation: slide-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slide-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	-webkit-animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+	animation: slide-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 @-webkit-keyframes slide-top {
 	0% {
-	  -webkit-transform: translateY(0);
-			  transform: translateY(0);
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
 	}
 	100% {
-	  -webkit-transform: translateY(-100px);
-			  transform: translateY(-100px);
+		-webkit-transform: translateY(-100px);
+		transform: translateY(-100px);
 	}
-  }
-  @keyframes slide-top {
+}
+@keyframes slide-top {
 	0% {
-	  -webkit-transform: translateY(0);
-			  transform: translateY(0);
+		-webkit-transform: translateY(0);
+		transform: translateY(0);
 	}
 	100% {
-	  -webkit-transform: translateY(-100px);
-			  transform: translateY(-100px);
+		-webkit-transform: translateY(-100px);
+		transform: translateY(-100px);
 	}
-  }
+}
 
-
-  
 .overview {
 	margin-top: 30px;
 
@@ -431,13 +401,12 @@ slide-top {
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-bottom: 15px;
-	
+
 	.infoOverview {
 		padding: 10px;
 		font-size: 18px;
 		font-weight: bolder;
 		text-align: center;
-		
 	}
 	.infoAviso {
 		padding: 10px;
@@ -445,7 +414,6 @@ slide-top {
 		color: dimgray;
 	}
 }
-
 
 .noSearch {
 	padding: 30px;
@@ -472,15 +440,14 @@ slide-top {
 	align-items: center;
 	align-content: center;
 
-
-	h1{
+	h1 {
 		font-size: 18px;
 	}
 }
 
 .opcoes {
 	margin: 25px;
-	
+
 	.autoUpdate {
 		margin: 10px;
 	}
@@ -502,10 +469,9 @@ slide-top {
 				display: block;
 				width: 40%;
 				height: auto;
-			  }
+			}
 		}
 
-		
 		.titulo {
 			font-size: 16px;
 			font-weight: bold;
@@ -523,6 +489,4 @@ slide-top {
 			text-align: center;
 		}
 	}
-
-
 }

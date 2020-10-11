@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-
-html, body {
-    margin: 0;
-    padding: 0;
+html,
+body {
+	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
-	font-family: 'Roboto';
+	font-family: "Roboto";
 }
 
 .topbar {
-	background-color: #FAFAFA;
+	background-color: #fafafa;
 	height: 50px;
 	margin-bottom: 0;
 }
@@ -22,11 +22,10 @@ html, body {
 	@media (max-width: 760px) {
 		max-height: 500px;
 	}
-	
 }
 
 .gmap {
-	background-color: #FAFAFA;
+	background-color: #fafafa;
 	height: calc(100vh - 50px);
 }
 
@@ -48,7 +47,6 @@ html, body {
 }
 
 @media (min-width: 760px) {
-
 	.bottombar {
 		height: 40px;
 		display: none;
@@ -56,7 +54,6 @@ html, body {
 }
 
 @media (max-width: 760px) {
-
 	.topbar {
 		display: none;
 	}
