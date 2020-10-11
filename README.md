@@ -1,6 +1,8 @@
 # São Paulo Bus Traker 
  
 São Paulo Bus Traker é uma dashboard que permite o monitoramento em tempo real da frota de ônibus da cidade de São Paulo.
+Video : https://youtu.be/W4noKg7Y-eI
+
 # Features!
   - Busca e localização de linhas
   - Busca e localização de paradas
